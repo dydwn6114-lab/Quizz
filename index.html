@@ -212,9 +212,15 @@ async function loadQuestions() {
   if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') { QDB = SAMPLE_QDB; return; }
   try {
     const data = await jsonp(`${SCRIPT_URL}?action=getQuestions`);
-    if (data.ok) QDB = data.questions;
-    else QDB = SAMPLE_QDB;
+    if (data.ok && data.questions &&
+        (data.questions['하']?.length || data.questions['중']?.length || data.questions['고']?.length)) {
+      QDB = data.questions;
+    } else {
+      QDB = SAMPLE_QDB;
+    }
   } catch(e) { QDB = SAMPLE_QDB; }
+  // 최종 안전망: 여전히 비어있으면 샘플로
+  if (!QDB['하']?.length && !QDB['중']?.length && !QDB['고']?.length) QDB = SAMPLE_QDB;
 }
 
 async function startQuiz() {
@@ -227,6 +233,7 @@ async function startQuiz() {
   btn.disabled = true; btn.textContent = '문제 불러오는 중...';
   await loadQuestions();
   btn.disabled = false; btn.textContent = '퀴즈 시작';
+  if (!QDB || !QDB['하'] || !QDB['하'].length) QDB = SAMPLE_QDB;
   S = { name, sid, level:'하', qNum:0,
         scores:{하:0,중:0,고:0}, usedIdx:{하:[],중:[],고:[]},
         journey:[], startTime:Date.now(), week:getWeek() };
