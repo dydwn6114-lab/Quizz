@@ -161,7 +161,7 @@
 // ============================================================
 // ★ Apps Script 배포 URL
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNLASl6_b_trHkt7b7cBw3Y7y7Y4kY6-MBFnr4y1QJZCdMM2D11dD7kh2qpfQIrUbb4w/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV8dU3xm25VpGX1s2Oi5GjY3RM3mjzlxwa8txxiG15uX-BrHzSO2jJUEVDXMviItqV_A/exec';
 // ============================================================
 
 const MAX_Q = 15;
@@ -351,9 +351,10 @@ async function showResult() {
       delete window[cbName]; script.remove();
     };
     const params = new URLSearchParams({
+      action: 'saveResult',
       callback: cbName,
       data: JSON.stringify({
-        action:'saveResult', week:S.week, name:S.name, sid:S.sid,
+        week:S.week, name:S.name, sid:S.sid,
         grade:g, total, scoreHigh:S.scores['고'], scoreMid:S.scores['중'], scoreLow:S.scores['하'],
         timeSeconds:elapsed, journey:S.journey
       })
