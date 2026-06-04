@@ -10,82 +10,90 @@
   .wrap { width: 100%; max-width: 480px; }
   .screen { display: none; }
   .screen.active { display: block; }
-
   .header { text-align: center; margin-bottom: 1.5rem; }
   .header h1 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
   .header p { font-size: 13px; color: #888; }
-
   .card { background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
-
   label { display: block; font-size: 13px; color: #666; margin-bottom: 5px; }
   input { width: 100%; padding: 9px 12px; font-size: 14px; border: 1px solid #ddd; border-radius: 8px; outline: none; margin-bottom: 1rem; }
   input:focus { border-color: #185FA5; }
-
   .btn { width: 100%; padding: 11px; font-size: 14px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; }
   .btn-primary { background: #185FA5; color: #fff; }
   .btn-primary:hover { background: #0C447C; }
   .btn-secondary { background: #f0f0ee; color: #333; border: 1px solid #ddd; }
   .btn-secondary:hover { background: #e8e8e4; }
   .btn:disabled { opacity: 0.5; cursor: default; }
-
   .info-box { background: #f0f0ee; border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #666; line-height: 1.8; margin-top: 1rem; }
   .info-box strong { color: #333; }
-
   .progress-bar { background: #e8e8e4; border-radius: 4px; height: 5px; margin-bottom: 1rem; overflow: hidden; }
   .progress-fill { height: 100%; background: #185FA5; border-radius: 4px; transition: width 0.4s; }
-
   .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
   .q-counter { font-size: 13px; color: #888; }
   .week-badge { font-size: 11px; color: #888; background: #f0f0ee; padding: 2px 8px; border-radius: 6px; }
-
   .level-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; margin-bottom: 0.75rem; }
   .lv-하 { background: #FAEEDA; color: #633806; }
   .lv-중 { background: #EAF3DE; color: #3B6D11; }
   .lv-고 { background: #E6F1FB; color: #185FA5; }
-
   .q-text { font-size: 15px; font-weight: 500; color: #1a1a1a; margin-bottom: 1rem; line-height: 1.6; }
-
   .options { display: flex; flex-direction: column; gap: 8px; }
   .option { padding: 10px 14px; border: 1px solid #e8e8e4; border-radius: 8px; font-size: 14px; cursor: pointer; color: #333; background: #fff; text-align: left; transition: all 0.15s; }
   .option:hover:not(:disabled) { background: #f5f5f3; border-color: #ccc; }
   .option.correct { border-color: #3B6D11; background: #EAF3DE; color: #3B6D11; }
   .option.wrong { border-color: #A32D2D; background: #FCEBEB; color: #A32D2D; }
-
   .feedback { font-size: 13px; padding: 9px 12px; border-radius: 8px; margin-top: 10px; line-height: 1.5; }
   .feedback.correct { background: #EAF3DE; color: #3B6D11; }
   .feedback.wrong { background: #FCEBEB; color: #A32D2D; }
   .level-up-msg { text-align: center; padding: 8px; font-size: 13px; color: #185FA5; font-weight: 600; margin-top: 8px; }
-
   .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
   .stat-card { background: #f5f5f3; border-radius: 8px; padding: 12px; text-align: center; }
   .stat-num { font-size: 22px; font-weight: 600; color: #1a1a1a; }
   .stat-label { font-size: 11px; color: #888; margin-top: 2px; }
-
   .grade-display { text-align: center; padding: 1.25rem; }
   .grade-letter { font-size: 52px; font-weight: 700; line-height: 1; }
   .grade-A { color: #3B6D11; } .grade-B { color: #185FA5; } .grade-C { color: #BA7517; } .grade-F { color: #A32D2D; }
   .grade-desc { font-size: 13px; color: #888; margin-top: 6px; }
-
   .breakdown-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f0f0ee; font-size: 13px; color: #666; }
   .breakdown-row:last-child { border: none; }
   .breakdown-val { font-weight: 600; color: #333; }
-
   .journey { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
   .jc { padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
   .jc-하 { background: #FAEEDA; color: #633806; }
   .jc-중 { background: #EAF3DE; color: #3B6D11; }
   .jc-고 { background: #E6F1FB; color: #185FA5; }
   .jc-x { background: #FCEBEB; color: #A32D2D; text-decoration: line-through; }
-
   .saving-msg { text-align: center; font-size: 13px; color: #888; margin-top: 8px; }
   .error-msg { background: #FCEBEB; color: #A32D2D; font-size: 13px; padding: 8px 12px; border-radius: 8px; margin-top: 8px; }
+  .code-box { text-align: center; margin: 1rem 0; }
+  .code-hint { font-size: 12px; color: #888; margin-bottom: 8px; }
+  .code-input { width: 160px; text-align: center; font-size: 22px; font-weight: 700; letter-spacing: 8px; padding: 10px; border: 2px solid #ddd; border-radius: 8px; outline: none; }
+  .code-input:focus { border-color: #185FA5; }
+  .blocked-screen { text-align: center; padding: 3rem 1rem; }
+  .blocked-screen h2 { font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
+  .blocked-screen p { font-size: 13px; color: #888; line-height: 1.6; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
+<!-- ── 접속 코드 입력 ── -->
+<div id="s-code" class="screen active">
+  <div class="header">
+    <h1>경영경제통계 퀴즈</h1>
+    <p>수업 시간에 칠판의 접속 코드를 입력하세요</p>
+  </div>
+  <div class="card">
+    <div class="code-box">
+      <p class="code-hint">접속 코드 (4자리)</p>
+      <input type="text" class="code-input" id="inp-code" maxlength="4" placeholder="0000" inputmode="numeric">
+    </div>
+    <button class="btn btn-primary" onclick="checkCode()">확인</button>
+    <div id="code-error"></div>
+  </div>
+  <div class="info-box">수업 중 칠판에 적힌 코드를 입력해야 퀴즈를 시작할 수 있습니다.</div>
+</div>
+
 <!-- ── 로그인 ── -->
-<div id="s-login" class="screen active">
+<div id="s-login" class="screen">
   <div class="header">
     <h1>경영경제통계 퀴즈</h1>
     <p id="week-label-login">매주 퀴즈로 실력을 확인하세요</p>
@@ -151,32 +159,62 @@
 </div>
 <script>
 // ============================================================
-// ★ 여기에 Apps Script 배포 URL을 붙여넣으세요 ★
+// ★ Apps Script 배포 URL
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxuH3qE0N0vXCdRWyykGRnkDgTwFk5lCQDwniOLqgvGuEjkIZObRY7zYGNq-1DQZ9VYUw/exec';
+const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 // ============================================================
+
 const MAX_Q = 15;
 let QDB = {하:[], 중:[], 고:[]};
 let S = {};
 
-// 주차 계산
 function getWeek() { return Math.ceil(new Date().getDate() / 7); }
 
-// 시트에서 문제 로드
-async function loadQuestions() {
-  // SCRIPT_URL 미설정 시 샘플 문제 사용
+// JSONP 호출 유틸
+function jsonp(url) {
+  return new Promise((resolve, reject) => {
+    const cbName = '_cb' + Date.now();
+    const script = document.createElement('script');
+    window[cbName] = (data) => { resolve(data); delete window[cbName]; script.remove(); };
+    script.onerror = reject;
+    script.src = url + '&callback=' + cbName;
+    document.body.appendChild(script);
+    setTimeout(() => reject(new Error('timeout')), 8000);
+  });
+}
+
+// ── 접속 코드 확인 ──────────────────────────
+async function checkCode() {
+  const code = document.getElementById('inp-code').value.trim();
+  const errEl = document.getElementById('code-error');
+  if (!code) { errEl.innerHTML = '<div class="error-msg">코드를 입력해주세요.</div>'; return; }
+
+  // SCRIPT_URL 미설정 시 샘플 코드 1234 허용
   if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
-    QDB = SAMPLE_QDB;
-    return true;
+    if (code === '1234') { showScreen('s-login'); return; }
+    errEl.innerHTML = '<div class="error-msg">코드가 올바르지 않습니다. (샘플 코드: 1234)</div>';
+    return;
   }
+
   try {
-    const res = await fetch(`${SCRIPT_URL}?action=getQuestions`);
-    const data = await res.json();
-    if (data.ok) { QDB = data.questions; return true; }
-  } catch(e) {}
-  // 로드 실패 시 샘플로 폴백
-  QDB = SAMPLE_QDB;
-  return false;
+    const res = await jsonp(`${SCRIPT_URL}?action=checkCode&code=${code}`);
+    if (res.ok) { showScreen('s-login'); }
+    else { errEl.innerHTML = '<div class="error-msg">코드가 올바르지 않습니다.</div>'; }
+  } catch(e) {
+    errEl.innerHTML = '<div class="error-msg">서버 연결 실패. 다시 시도해주세요.</div>';
+  }
+}
+
+// 엔터키로도 코드 확인
+document.getElementById('inp-code').addEventListener('keydown', e => { if (e.key === 'Enter') checkCode(); });
+
+async function loadQuestions() {
+  if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') { QDB = SAMPLE_QDB; return; }
+  try {
+    const data = await jsonp(`${SCRIPT_URL}?action=getQuestions`);
+    if (data.ok) QDB = data.questions;
+    else QDB = SAMPLE_QDB;
+  } catch(e) { QDB = SAMPLE_QDB; }
 }
 
 async function startQuiz() {
@@ -185,16 +223,13 @@ async function startQuiz() {
   const errEl = document.getElementById('login-error');
   if (!name || !sid) { errEl.innerHTML = '<div class="error-msg">이름과 학번을 입력해주세요.</div>'; return; }
   errEl.innerHTML = '';
-
   const btn = document.getElementById('btn-start');
   btn.disabled = true; btn.textContent = '문제 불러오는 중...';
   await loadQuestions();
   btn.disabled = false; btn.textContent = '퀴즈 시작';
-
   S = { name, sid, level:'하', qNum:0,
         scores:{하:0,중:0,고:0}, usedIdx:{하:[],중:[],고:[]},
         journey:[], startTime:Date.now(), week:getWeek() };
-
   document.getElementById('week-badge').textContent = S.week + '주차';
   showScreen('s-quiz');
   renderQuestion();
@@ -208,8 +243,7 @@ function showScreen(id) {
 function getNextQ(lv) {
   const pool = QDB[lv] || [];
   if (!pool.length) return null;
-  const used = S.usedIdx[lv];
-  let avail = pool.map((_,i)=>i).filter(i=>!used.includes(i));
+  let avail = pool.map((_,i)=>i).filter(i=>!S.usedIdx[lv].includes(i));
   if (!avail.length) { S.usedIdx[lv] = []; avail = pool.map((_,i)=>i); }
   const idx = avail[Math.floor(Math.random() * avail.length)];
   S.usedIdx[lv].push(idx);
@@ -222,7 +256,6 @@ function renderQuestion() {
   currentQ = getNextQ(S.level);
   if (!currentQ) { showResult(); return; }
   S.qNum++;
-
   document.getElementById('q-counter').textContent = `문제 ${S.qNum} / ${MAX_Q}`;
   document.getElementById('progress').style.width = `${(S.qNum / MAX_Q) * 100}%`;
   const badge = document.getElementById('lv-badge');
@@ -232,7 +265,6 @@ function renderQuestion() {
   document.getElementById('q-feedback').innerHTML = '';
   document.getElementById('lv-msg').innerHTML = '';
   document.getElementById('btn-next').style.display = 'none';
-
   const opts = document.getElementById('q-options');
   opts.innerHTML = '';
   currentQ.opts.forEach((o, i) => {
@@ -249,10 +281,8 @@ function selectAnswer(idx) {
   document.querySelectorAll('.option').forEach(b => { b.disabled = true; b.onclick = null; });
   document.querySelectorAll('.option')[idx].classList.add(correct ? 'correct' : 'wrong');
   if (!correct) document.querySelectorAll('.option')[currentQ.ans].classList.add('correct');
-
   document.getElementById('q-feedback').innerHTML =
     `<div class="feedback ${correct?'correct':'wrong'}">${correct?'✓ 정답':'✗ 오답'} — ${currentQ.exp}</div>`;
-
   S.journey.push({lv: S.level, correct});
   if (correct) {
     S.scores[S.level]++;
@@ -262,7 +292,7 @@ function selectAnswer(idx) {
         `<div class="level-up-msg">↑ ${S.level === '하' ? '하' : '중'} → ${next === '고' ? '상' : next} 수준으로 상승!</div>`;
       S.level = next;
     } else {
-      document.getElementById('lv-msg').innerHTML = `<div class="level-up-msg">최고 수준 유지 중 🎯</div>`;
+      document.getElementById('lv-msg').innerHTML = `<div class="level-up-msg">최고 수준 유지 중</div>`;
     }
   }
   const btnNext = document.getElementById('btn-next');
@@ -285,7 +315,6 @@ async function showResult() {
   const elapsed = Math.floor((Date.now() - S.startTime) / 1000);
   const total = S.scores['하'] + S.scores['중'] + S.scores['고'];
   const {g, d} = calcGrade();
-
   document.getElementById('res-label').textContent = `${S.name} · ${S.sid} · ${S.week}주차`;
   const gl = document.getElementById('res-grade');
   gl.textContent = g; gl.className = 'grade-letter grade-' + g;
@@ -294,43 +323,41 @@ async function showResult() {
   document.getElementById('res-high').textContent = S.scores['고'];
   const mm = Math.floor(elapsed/60), ss = elapsed % 60;
   document.getElementById('res-time').textContent = mm + ':' + String(ss).padStart(2,'0');
-
   document.getElementById('breakdown').innerHTML = ['고','중','하'].map(lv =>
     `<div class="breakdown-row"><span>${lv==='고'?'상':lv} 수준 정답</span><span class="breakdown-val">${S.scores[lv]}문제</span></div>`
   ).join('');
-
   document.getElementById('journey').innerHTML = S.journey.map((j,i) =>
     `${i>0?'<span style="color:#ccc;font-size:11px">›</span>':''}<span class="jc ${j.correct?'jc-'+j.lv:'jc-x'}">${j.lv==='고'?'상':j.lv}</span>`
   ).join('');
-
   showScreen('s-result');
 
-  // 구글 시트에 결과 저장
-  if (SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-    const statusEl = document.getElementById('save-status');
-    statusEl.innerHTML = '<p class="saving-msg">결과 저장 중...</p>';
-    try {
-      const res = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          action: 'saveResult',
-          week: S.week, name: S.name, sid: S.sid,
-          grade: g, total,
-          scoreHigh: S.scores['고'], scoreMid: S.scores['중'], scoreLow: S.scores['하'],
-          timeSeconds: elapsed, journey: S.journey
-        })
-      });
-      const data = await res.json();
-      statusEl.innerHTML = data.ok
+  if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') return;
+  const statusEl = document.getElementById('save-status');
+  statusEl.innerHTML = '<p class="saving-msg">결과 저장 중...</p>';
+  try {
+    const cbName = '_save' + Date.now();
+    const script = document.createElement('script');
+    window[cbName] = (res) => {
+      statusEl.innerHTML = res.ok
         ? '<p class="saving-msg">✓ 결과가 저장되었습니다</p>'
-        : '<div class="error-msg">저장 실패 — 교수님께 문의하세요</div>';
-    } catch(e) {
-      statusEl.innerHTML = '<div class="error-msg">저장 실패 — 네트워크를 확인해주세요</div>';
-    }
+        : '<div class="error-msg">저장 실패</div>';
+      delete window[cbName]; script.remove();
+    };
+    const params = new URLSearchParams({
+      callback: cbName,
+      data: JSON.stringify({
+        action:'saveResult', week:S.week, name:S.name, sid:S.sid,
+        grade:g, total, scoreHigh:S.scores['고'], scoreMid:S.scores['중'], scoreLow:S.scores['하'],
+        timeSeconds:elapsed, journey:S.journey
+      })
+    });
+    script.src = `${SCRIPT_URL}?${params}`;
+    document.body.appendChild(script);
+  } catch(e) {
+    statusEl.innerHTML = '<div class="error-msg">저장 실패 — 네트워크를 확인해주세요</div>';
   }
 }
 
-// ── 샘플 문제 (시트 연동 전 또는 폴백용) ──────────
 const SAMPLE_QDB = {
   하:[
     {q:"평균(mean)에 대한 설명으로 옳은 것은?",opts:["모든 관측값의 합 ÷ 관측수","중앙에 위치한 값","가장 빈번하게 나타나는 값","최대·최소의 평균"],ans:0,exp:"평균은 모든 값의 합을 관측수로 나눈 값입니다."},
