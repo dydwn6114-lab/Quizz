@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경영경제통계 퀴즈</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Pretendard', -apple-system, sans-serif; background: #f5f5f3; min-height: 100vh; display: flex; justify-content: center; padding: 2rem 1rem; }
+  .wrap { width: 100%; max-width: 480px; }
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .header { text-align: center; margin-bottom: 1.5rem; }
+  .header h1 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+  .header p { font-size: 13px; color: #888; }
+
+  .card { background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+
+  label { display: block; font-size: 13px; color: #666; margin-bottom: 5px; }
+  input { width: 100%; padding: 9px 12px; font-size: 14px; border: 1px solid #ddd; border-radius: 8px; outline: none; margin-bottom: 1rem; }
+  input:focus { border-color: #185FA5; }
+
+  .btn { width: 100%; padding: 11px; font-size: 14px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; }
+  .btn-primary { background: #185FA5; color: #fff; }
+  .btn-primary:hover { background: #0C447C; }
+  .btn-secondary { background: #f0f0ee; color: #333; border: 1px solid #ddd; }
+  .btn-secondary:hover { background: #e8e8e4; }
+  .btn:disabled { opacity: 0.5; cursor: default; }
+
+  .info-box { background: #f0f0ee; border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #666; line-height: 1.8; margin-top: 1rem; }
+  .info-box strong { color: #333; }
+
+  .progress-bar { background: #e8e8e4; border-radius: 4px; height: 5px; margin-bottom: 1rem; overflow: hidden; }
+  .progress-fill { height: 100%; background: #185FA5; border-radius: 4px; transition: width 0.4s; }
+
+  .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+  .q-counter { font-size: 13px; color: #888; }
+  .week-badge { font-size: 11px; color: #888; background: #f0f0ee; padding: 2px 8px; border-radius: 6px; }
+
+  .level-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; margin-bottom: 0.75rem; }
+  .lv-하 { background: #FAEEDA; color: #633806; }
+  .lv-중 { background: #EAF3DE; color: #3B6D11; }
+  .lv-고 { background: #E6F1FB; color: #185FA5; }
+
+  .q-text { font-size: 15px; font-weight: 500; color: #1a1a1a; margin-bottom: 1rem; line-height: 1.6; }
+
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option { padding: 10px 14px; border: 1px solid #e8e8e4; border-radius: 8px; font-size: 14px; cursor: pointer; color: #333; background: #fff; text-align: left; transition: all 0.15s; }
+  .option:hover:not(:disabled) { background: #f5f5f3; border-color: #ccc; }
+  .option.correct { border-color: #3B6D11; background: #EAF3DE; color: #3B6D11; }
+  .option.wrong { border-color: #A32D2D; background: #FCEBEB; color: #A32D2D; }
+
+  .feedback { font-size: 13px; padding: 9px 12px; border-radius: 8px; margin-top: 10px; line-height: 1.5; }
+  .feedback.correct { background: #EAF3DE; color: #3B6D11; }
+  .feedback.wrong { background: #FCEBEB; color: #A32D2D; }
+  .level-up-msg { text-align: center; padding: 8px; font-size: 13px; color: #185FA5; font-weight: 600; margin-top: 8px; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .stat-card { background: #f5f5f3; border-radius: 8px; padding: 12px; text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 600; color: #1a1a1a; }
+  .stat-label { font-size: 11px; color: #888; margin-top: 2px; }
+
+  .grade-display { text-align: center; padding: 1.25rem; }
+  .grade-letter { font-size: 52px; font-weight: 700; line-height: 1; }
+  .grade-A { color: #3B6D11; } .grade-B { color: #185FA5; } .grade-C { color: #BA7517; } .grade-F { color: #A32D2D; }
+  .grade-desc { font-size: 13px; color: #888; margin-top: 6px; }
+
+  .breakdown-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f0f0ee; font-size: 13px; color: #666; }
+  .breakdown-row:last-child { border: none; }
+  .breakdown-val { font-weight: 600; color: #333; }
+
+  .journey { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+  .jc { padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+  .jc-하 { background: #FAEEDA; color: #633806; }
+  .jc-중 { background: #EAF3DE; color: #3B6D11; }
+  .jc-고 { background: #E6F1FB; color: #185FA5; }
+  .jc-x { background: #FCEBEB; color: #A32D2D; text-decoration: line-through; }
+
+  .saving-msg { text-align: center; font-size: 13px; color: #888; margin-top: 8px; }
+  .error-msg { background: #FCEBEB; color: #A32D2D; font-size: 13px; padding: 8px 12px; border-radius: 8px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ── 로그인 ── -->
+<div id="s-login" class="screen active">
+  <div class="header">
+    <h1>경영경제통계 퀴즈</h1>
+    <p id="week-label-login">매주 퀴즈로 실력을 확인하세요</p>
+  </div>
+  <div class="card">
+    <label>이름</label>
+    <input type="text" id="inp-name" placeholder="홍길동">
+    <label>학번</label>
+    <input type="text" id="inp-id" placeholder="20241234" style="margin-bottom:0">
+    <button class="btn btn-primary" style="margin-top:1rem" id="btn-start" onclick="startQuiz()">퀴즈 시작</button>
+    <div id="login-error"></div>
+  </div>
+  <div class="info-box">
+    <strong>진행 방식</strong><br>
+    하 수준부터 시작 → 맞히면 상승 (하→중→상)<br>
+    틀리면 같은 수준 유지 · 총 15문제<br>
+    상 문제 5개 이상 정답 시 A학점
+  </div>
+</div>
+
+<!-- ── 퀴즈 ── -->
+<div id="s-quiz" class="screen">
+  <div class="meta-row">
+    <span class="q-counter" id="q-counter">문제 1</span>
+    <span class="week-badge" id="week-badge">1주차</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+  <div class="card">
+    <span class="level-badge" id="lv-badge"></span>
+    <p class="q-text" id="q-text"></p>
+    <div class="options" id="q-options"></div>
+    <div id="q-feedback"></div>
+    <div id="lv-msg"></div>
+  </div>
+  <button class="btn btn-secondary" id="btn-next" style="display:none" onclick="nextQuestion()">다음 문제 →</button>
+</div>
+
+<!-- ── 결과 ── -->
+<div id="s-result" class="screen">
+  <div class="header">
+    <h1>퀴즈 완료</h1>
+    <p id="res-label"></p>
+  </div>
+  <div class="card">
+    <div class="grade-display">
+      <div class="grade-letter" id="res-grade"></div>
+      <div class="grade-desc" id="res-grade-desc"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num" id="res-total"></div><div class="stat-label">총 정답</div></div>
+      <div class="stat-card"><div class="stat-num" id="res-high"></div><div class="stat-label">상 정답</div></div>
+      <div class="stat-card"><div class="stat-num" id="res-time"></div><div class="stat-label">소요 시간</div></div>
+    </div>
+    <div id="breakdown"></div>
+    <div style="margin-top:1rem">
+      <p style="font-size:12px;color:#888;margin-bottom:5px">수준 이동 기록</p>
+      <div class="journey" id="journey"></div>
+    </div>
+    <div id="save-status"></div>
+  </div>
+</div>
+
+</div>
+<script>
+// ============================================================
+// ★ 여기에 Apps Script 배포 URL을 붙여넣으세요 ★
+// ============================================================
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxuH3qE0N0vXCdRWyykGRnkDgTwFk5lCQDwniOLqgvGuEjkIZObRY7zYGNq-1DQZ9VYUw/exec';
+// ============================================================
+const MAX_Q = 15;
+let QDB = {하:[], 중:[], 고:[]};
+let S = {};
+
+// 주차 계산
+function getWeek() { return Math.ceil(new Date().getDate() / 7); }
+
+// 시트에서 문제 로드
+async function loadQuestions() {
+  // SCRIPT_URL 미설정 시 샘플 문제 사용
+  if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    QDB = SAMPLE_QDB;
+    return true;
+  }
+  try {
+    const res = await fetch(`${SCRIPT_URL}?action=getQuestions`);
+    const data = await res.json();
+    if (data.ok) { QDB = data.questions; return true; }
+  } catch(e) {}
+  // 로드 실패 시 샘플로 폴백
+  QDB = SAMPLE_QDB;
+  return false;
+}
+
+async function startQuiz() {
+  const name = document.getElementById('inp-name').value.trim();
+  const sid = document.getElementById('inp-id').value.trim();
+  const errEl = document.getElementById('login-error');
+  if (!name || !sid) { errEl.innerHTML = '<div class="error-msg">이름과 학번을 입력해주세요.</div>'; return; }
+  errEl.innerHTML = '';
+
+  const btn = document.getElementById('btn-start');
+  btn.disabled = true; btn.textContent = '문제 불러오는 중...';
+  await loadQuestions();
+  btn.disabled = false; btn.textContent = '퀴즈 시작';
+
+  S = { name, sid, level:'하', qNum:0,
+        scores:{하:0,중:0,고:0}, usedIdx:{하:[],중:[],고:[]},
+        journey:[], startTime:Date.now(), week:getWeek() };
+
+  document.getElementById('week-badge').textContent = S.week + '주차';
+  showScreen('s-quiz');
+  renderQuestion();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function getNextQ(lv) {
+  const pool = QDB[lv] || [];
+  if (!pool.length) return null;
+  const used = S.usedIdx[lv];
+  let avail = pool.map((_,i)=>i).filter(i=>!used.includes(i));
+  if (!avail.length) { S.usedIdx[lv] = []; avail = pool.map((_,i)=>i); }
+  const idx = avail[Math.floor(Math.random() * avail.length)];
+  S.usedIdx[lv].push(idx);
+  return pool[idx];
+}
+
+let currentQ = null;
+function renderQuestion() {
+  if (S.qNum >= MAX_Q) { showResult(); return; }
+  currentQ = getNextQ(S.level);
+  if (!currentQ) { showResult(); return; }
+  S.qNum++;
+
+  document.getElementById('q-counter').textContent = `문제 ${S.qNum} / ${MAX_Q}`;
+  document.getElementById('progress').style.width = `${(S.qNum / MAX_Q) * 100}%`;
+  const badge = document.getElementById('lv-badge');
+  badge.textContent = {하:'하 수준', 중:'중 수준', 고:'상 수준'}[S.level];
+  badge.className = 'level-badge lv-' + S.level;
+  document.getElementById('q-text').textContent = currentQ.q;
+  document.getElementById('q-feedback').innerHTML = '';
+  document.getElementById('lv-msg').innerHTML = '';
+  document.getElementById('btn-next').style.display = 'none';
+
+  const opts = document.getElementById('q-options');
+  opts.innerHTML = '';
+  currentQ.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = ['①','②','③','④'][i] + ' ' + o;
+    btn.onclick = () => selectAnswer(i);
+    opts.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx) {
+  const correct = idx === currentQ.ans;
+  document.querySelectorAll('.option').forEach(b => { b.disabled = true; b.onclick = null; });
+  document.querySelectorAll('.option')[idx].classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) document.querySelectorAll('.option')[currentQ.ans].classList.add('correct');
+
+  document.getElementById('q-feedback').innerHTML =
+    `<div class="feedback ${correct?'correct':'wrong'}">${correct?'✓ 정답':'✗ 오답'} — ${currentQ.exp}</div>`;
+
+  S.journey.push({lv: S.level, correct});
+  if (correct) {
+    S.scores[S.level]++;
+    const next = {하:'중', 중:'고', 고:null}[S.level];
+    if (next) {
+      document.getElementById('lv-msg').innerHTML =
+        `<div class="level-up-msg">↑ ${S.level === '하' ? '하' : '중'} → ${next === '고' ? '상' : next} 수준으로 상승!</div>`;
+      S.level = next;
+    } else {
+      document.getElementById('lv-msg').innerHTML = `<div class="level-up-msg">최고 수준 유지 중 🎯</div>`;
+    }
+  }
+  const btnNext = document.getElementById('btn-next');
+  btnNext.style.display = 'block';
+  btnNext.textContent = S.qNum >= MAX_Q ? '결과 보기' : '다음 문제 →';
+}
+
+function nextQuestion() { renderQuestion(); }
+
+function calcGrade() {
+  const h=S.scores['고'], m=S.scores['중'], l=S.scores['하'];
+  const total = h + m + l;
+  if (h >= 5) return {g:'A', d:'상 문제 5개 이상 정답 — 최우수'};
+  if (total >= 10) return {g:'B', d:'총 10문제 이상 정답 — 우수'};
+  if (total >= 7) return {g:'C', d:'총 7문제 이상 정답 — 보통'};
+  return {g:'F', d:'기준 미달 — 재응시 필요'};
+}
+
+async function showResult() {
+  const elapsed = Math.floor((Date.now() - S.startTime) / 1000);
+  const total = S.scores['하'] + S.scores['중'] + S.scores['고'];
+  const {g, d} = calcGrade();
+
+  document.getElementById('res-label').textContent = `${S.name} · ${S.sid} · ${S.week}주차`;
+  const gl = document.getElementById('res-grade');
+  gl.textContent = g; gl.className = 'grade-letter grade-' + g;
+  document.getElementById('res-grade-desc').textContent = d;
+  document.getElementById('res-total').textContent = total;
+  document.getElementById('res-high').textContent = S.scores['고'];
+  const mm = Math.floor(elapsed/60), ss = elapsed % 60;
+  document.getElementById('res-time').textContent = mm + ':' + String(ss).padStart(2,'0');
+
+  document.getElementById('breakdown').innerHTML = ['고','중','하'].map(lv =>
+    `<div class="breakdown-row"><span>${lv==='고'?'상':lv} 수준 정답</span><span class="breakdown-val">${S.scores[lv]}문제</span></div>`
+  ).join('');
+
+  document.getElementById('journey').innerHTML = S.journey.map((j,i) =>
+    `${i>0?'<span style="color:#ccc;font-size:11px">›</span>':''}<span class="jc ${j.correct?'jc-'+j.lv:'jc-x'}">${j.lv==='고'?'상':j.lv}</span>`
+  ).join('');
+
+  showScreen('s-result');
+
+  // 구글 시트에 결과 저장
+  if (SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    const statusEl = document.getElementById('save-status');
+    statusEl.innerHTML = '<p class="saving-msg">결과 저장 중...</p>';
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          action: 'saveResult',
+          week: S.week, name: S.name, sid: S.sid,
+          grade: g, total,
+          scoreHigh: S.scores['고'], scoreMid: S.scores['중'], scoreLow: S.scores['하'],
+          timeSeconds: elapsed, journey: S.journey
+        })
+      });
+      const data = await res.json();
+      statusEl.innerHTML = data.ok
+        ? '<p class="saving-msg">✓ 결과가 저장되었습니다</p>'
+        : '<div class="error-msg">저장 실패 — 교수님께 문의하세요</div>';
+    } catch(e) {
+      statusEl.innerHTML = '<div class="error-msg">저장 실패 — 네트워크를 확인해주세요</div>';
+    }
+  }
+}
+
+// ── 샘플 문제 (시트 연동 전 또는 폴백용) ──────────
+const SAMPLE_QDB = {
+  하:[
+    {q:"평균(mean)에 대한 설명으로 옳은 것은?",opts:["모든 관측값의 합 ÷ 관측수","중앙에 위치한 값","가장 빈번하게 나타나는 값","최대·최소의 평균"],ans:0,exp:"평균은 모든 값의 합을 관측수로 나눈 값입니다."},
+    {q:"표준편차가 클수록 데이터의 특성은?",opts:["평균에 집중","평균 주변에 넓게 분포","모두 같은 값","음수가 많음"],ans:1,exp:"표준편차가 클수록 데이터가 평균에서 더 멀리 퍼져 있습니다."},
+    {q:"확률의 기본 성질로 옳지 않은 것은?",opts:["0 ≤ P(A) ≤ 1","P(전체) = 1","P(A)+P(A')=1","P(A)>P(B)이면 A 반드시 발생"],ans:3,exp:"확률의 크기는 사건의 발생 여부를 보장하지 않습니다."},
+    {q:"명목 척도(nominal scale)의 예는?",opts:["성별","키","나이","소득"],ans:0,exp:"명목 척도는 크기나 순서가 없는 범주형 변수입니다."},
+    {q:"중앙값(median)의 특징으로 옳은 것은?",opts:["이상치에 민감하지 않다","모든 값을 사용","항상 평균보다 크다","음수가 될 수 없다"],ans:0,exp:"중앙값은 이상치(outlier)의 영향을 받지 않습니다."},
+  ],
+  중:[
+    {q:"결정계수(R²) = 0.85의 의미는?",opts:["회귀계수가 0.85","종속변수 분산의 85%가 독립변수로 설명됨","오차가 85%","표본 크기 85"],ans:1,exp:"R²는 종속변수 변동 중 독립변수가 설명하는 비율입니다."},
+    {q:"1종 오류(Type I Error)란?",opts:["귀무가설이 참인데 기각","귀무가설이 거짓인데 채택","표본 추출 오류","측정 오류"],ans:0,exp:"1종 오류: H₀가 참임에도 기각하는 오류 (유의수준 α)."},
+    {q:"중심극한정리(CLT)의 핵심은?",opts:["모든 분포는 정규분포","n이 충분히 크면 표본평균 → 정규분포 수렴","분산이 항상 1","표본과 모집단 분포 동일"],ans:1,exp:"CLT: n이 충분히 크면 표본평균 분포 → N(μ, σ²/n)."},
+    {q:"다중공선성의 주된 문제는?",opts:["OLS 불편성 훼손","개별 계수 추정의 불안정성","모형 적합도 하락","이분산성 발생"],ans:1,exp:"다중공선성은 계수 추정량의 분산을 크게 만들어 유의성 검정을 어렵게 합니다."},
+    {q:"p-값 0.03, 유의수준 0.05일 때 결론은?",opts:["귀무가설 기각","귀무가설 채택","결론 내릴 수 없음","표본 크기 부족"],ans:0,exp:"p < α (0.03 < 0.05)이므로 귀무가설을 기각합니다."},
+  ],
+  고:[
+    {q:"Gauss-Markov 조건이 아닌 것은?",opts:["E(ε)=0","등분산성","오차항의 정규분포 가정","독립변수와 오차항의 비상관"],ans:2,exp:"정규분포 가정은 BLUE가 아닌 t/F 검정을 위해 필요합니다."},
+    {q:"FE 모형이 RE 모형보다 선호되는 상황은?",opts:["개체효과와 독립변수가 상관될 때","표본 크기가 클 때","시간 불변 변수를 추정할 때","효율성이 중요할 때"],ans:0,exp:"Hausman test: 개체효과와 설명변수가 상관 → FE 선호."},
+    {q:"좋은 도구변수(IV)의 조건은?",opts:["내생변수와 강한 상관 + 오차항과 무상관","독립변수와 무상관 + 오차항과 상관","모든 변수와 강한 상관","표본 크기와 비례"],ans:0,exp:"IV 조건: ① 관련성(relevance) ② 외생성(exogeneity)."},
+    {q:"이분산성 존재 시 OLS의 문제는?",opts:["불편성 상실","일치성 상실","표준오차 편의 → 추론 오류","R² 왜곡"],ans:2,exp:"이분산성은 OLS 계수 자체는 불편이지만 표준오차가 편의되어 검정이 유효하지 않습니다."},
+    {q:"이중차분법(DiD)의 핵심 가정은?",opts:["처치군·통제군의 평행 추세(parallel trend)","처치의 무작위 배정","패널 데이터 필요","도구변수 존재"],ans:0,exp:"DiD의 핵심: 처치 없었다면 두 집단의 추세가 동일했을 것이라는 평행 추세 가정."},
+  ]
+};
+</script>
+</body>
+</html>
