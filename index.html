@@ -179,7 +179,7 @@ function jsonp(url) {
     script.onerror = reject;
     script.src = url + '&callback=' + cbName;
     document.body.appendChild(script);
-    setTimeout(() => reject(new Error('timeout')), 8000);
+    setTimeout(() => reject(new Error('timeout')), 15000);
   });
 }
 
